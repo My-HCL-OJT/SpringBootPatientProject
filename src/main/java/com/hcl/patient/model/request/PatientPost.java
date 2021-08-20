@@ -40,4 +40,5 @@ public class PatientPost {
 	private Integer nationalId;
 	private Address address;
 	private PatientMedicalHistory pmh;
+
 }
