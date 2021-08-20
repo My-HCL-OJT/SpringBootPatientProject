@@ -21,7 +21,7 @@ street
 city
 state
 landmark
-pincode
+zip
 }
 
 illnessVo{
@@ -39,6 +39,6 @@ public class PatientPost {
 	private String dob;
 	private Integer nationalId;
 	private Address address;
-	private PatientMedicalHistory pmh;
+	//private PatientMedicalHistory pmh;
 
 }
