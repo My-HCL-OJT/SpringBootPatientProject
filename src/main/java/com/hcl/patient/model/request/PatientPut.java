@@ -1,5 +1,27 @@
 package com.hcl.patient.model.request;
 
-public class PatientPut {
+import com.hcl.patient.model.Illness;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/*
+ * RequestBody model for PUT
+ * {
+ * patientId
+ * illnessVo{
+ * illness
+ * description
+ * hospitalAdmission
+ * }
+ */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientPut {
+	private long patientId;
+	private Illness illness;
 }
