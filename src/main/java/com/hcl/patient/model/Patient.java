@@ -36,7 +36,9 @@ public class Patient {
 	private String name;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
-	private PatientMedicalHistory pmh;
+	
+	//private PatientMedicalHistory pmh;
+
 	@Column(name = "patient_phoneNumber")
 	private String phoneNumber;
 	@Column(name = "patient_dob")
