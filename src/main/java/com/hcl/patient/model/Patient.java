@@ -38,6 +38,7 @@ public class Patient {
 	private Address address;
 	
 	//private PatientMedicalHistory pmh;
+
 	@Column(name = "patient_phoneNumber")
 	private String phoneNumber;
 	@Column(name = "patient_dob")
