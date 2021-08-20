@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /*one patient has one address*/
+
 /*Address
 
 1. AddressId
