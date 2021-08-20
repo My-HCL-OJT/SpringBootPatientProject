@@ -29,7 +29,7 @@ public class PatientMedicalHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pmh_id") private Long id;
-	@Column(name = "pmh_enums") private IllnessEnums illEnums;
+	 private IllnessEnums illEnums;
 	@Column(name="pmh_descp") private String Description;
 	@Column(name="pmh_hospitalAdmission") private Boolean hospitalAdmission;
 	@Column(name = "pmh_cdate", nullable = true) private String creationDate;
