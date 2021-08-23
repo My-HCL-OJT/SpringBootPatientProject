@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 5. Landmark
 6. Pincode
 */
-@Entity(name="address")
+@Entity(name = "address")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")
-	private Long id;
+	private Integer id;
 	@Column(name = "address_street")
 	private String street;
 	@Column(name = "address_city")

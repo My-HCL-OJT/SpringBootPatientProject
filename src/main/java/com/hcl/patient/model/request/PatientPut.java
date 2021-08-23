@@ -22,6 +22,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientPut {
-	private long patientId;
+	private Integer patientId;
 	private Illness illness;
 }

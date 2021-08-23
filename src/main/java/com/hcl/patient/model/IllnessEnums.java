@@ -32,13 +32,15 @@ public enum IllnessEnums {
 		this.description = description;
 		this.hospitalAdmission = hospitalAdmission;
 	}
-	
+
 	String getName() {
 		return name;
 	}
+
 	String getDescription() {
 		return description;
 	}
+
 	Boolean getHospitalAdmission() {
 		return hospitalAdmission;
 	}

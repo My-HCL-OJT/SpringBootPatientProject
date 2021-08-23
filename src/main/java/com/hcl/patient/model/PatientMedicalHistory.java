@@ -1,4 +1,7 @@
 package com.hcl.patient.model;
+
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 
 /*PatientMedicalHistory
 
@@ -22,26 +26,34 @@ import lombok.Data;
 8. Charges
 9. patientId
 */
+@Entity(name = "pmh")
 @Data
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientMedicalHistory {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pmh_id") private Long id;
-//	@Column(name = "pmh_enums") private IllnessEnums illEnums;
-	@Column(name="pmh_descp") private String Description;
-	@Column(name="pmh_hospitalAdmission") private Boolean hospitalAdmission;
-	@Column(name = "pmh_cdate", nullable = true) private String creationDate;
-	@Column(name = "pmh_ddate", nullable = true) private String dischargeDate;
-	@Column(name = "pmh_isAlive") private Boolean isAlive;
-	@Column(name = "pmh_charges") private Double charges;
-	@ManyToOne(cascade = CascadeType.ALL, optional = false) private Patient patient;
-	{
+	@Column(name = "pmh_id")
+	private Integer id;
+	@Column(name = "pmh_enums")
+	private IllnessEnums illEnums;
+	@Column(name = "pmh_descp")
+	private String Description;
+	@Column(name = "pmh_hospitalAdmission")
+	private Boolean hospitalAdmission;
+	@Column(name = "pmh_cdate")
+	private Date creationDate;
+	@Column(name = "pmh_ddate", nullable = true)
+	private Date dischargeDate;
+	@Column(name = "pmh_isAlive")
+	private Boolean isAlive;
+	@Column(name = "pmh_charges")
+	private Double charges;
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	private Patient patient;
 
-	}
-
-	public PatientMedicalHistory(String creationDate, String dischargeDate, Boolean isAlive, Double charges) {
+	public PatientMedicalHistory(Date creationDate, Date dischargeDate, Boolean isAlive, Double charges) {
 		this.creationDate = creationDate;
 		this.dischargeDate = dischargeDate;
 		this.isAlive = isAlive;
