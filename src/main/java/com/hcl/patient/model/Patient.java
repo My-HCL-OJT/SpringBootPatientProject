@@ -1,20 +1,24 @@
 package com.hcl.patient.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /*
  *Patient
@@ -33,38 +37,41 @@ import lombok.NoArgsConstructor;
 public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "patient_id")
-	private Integer id;
-	@Column(name = "patient_name")
+	private Long id;
 	private String name;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<PatientMedicalHistory> pmh;
-
-	@Column(name = "patient_phoneNumber")
 	private String phoneNumber;
-	@Column(name = "patient_dob")
+
 	private String dob;
-	@Column(name = "patient_nationalId")
+
 	private Integer nationalId;
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "patient_id", referencedColumnName = "id")
+	@ToString.Exclude
+	private List<PatientMedicalHistory> pmh = new ArrayList<PatientMedicalHistory>();
 
-	public boolean addPhoneNumber(PatientMedicalHistory data) {
-		return this.pmh.add(data);
+	public void addPmh(PatientMedicalHistory data) {
+		System.out.println(data);
+		pmh.add(data);
 	}
 
-	public boolean deletePhoneNumber(PatientMedicalHistory data) {
-		return this.pmh.remove(data);
+	public void deletePmh(PatientMedicalHistory data) {
+		pmh.remove(data);
 
 	}
 
-	public Patient(String name, Address address, String phoneNumber, String dob, Integer nationalId) {
+	public Patient(String name, Address address, String phoneNumber, String dob, Integer nationalId,
+			PatientMedicalHistory temp) {
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.dob = dob;
 		this.nationalId = nationalId;
+		this.pmh.add(temp);
+
 	}
 
 }
