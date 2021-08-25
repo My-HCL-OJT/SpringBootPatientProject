@@ -33,27 +33,27 @@ PatientMedicalHistory
 9. patientId
 
 
-1. get the patient history from patientId
+-/	get the patient history from patientId
 
-2. get- to chk if patient exists- nationalId
+-/	get- to chk if patient exists- nationalId
 
-3. POST to create a new patient record (If a patient already exist- then we will throw a custom exception with a message that patient already exist- RestControllerAdvice)
+-	POST to create a new patient record (If a patient already exist- then we will throw a custom exception with a message that patient already exist- RestControllerAdvice)
 
-4. PUT- we will update the patient illness
+-	PUT- we will update the patient illness
 
-5. Delete- by patient Id
+-/	Delete- by patient Id
 
-6. Get all patients with Illness-Covid in last 30 days
+-/	Get all patients with Illness-Covid in last 30 days
 
-7. Get the percentage of covid patients
+-/	Get the percentage of covid patients
 
-8. Get all patients who have been hospitalized.
+-/	Get all patients who have been hospitalized.
 
-9. Get all patients who are currently hospitalized.
+-/	Get all patients who are currently hospitalized.
 
-10. Get all patients who are dead.
+-/	Get all patients who are dead.
 
-11.Get the total sum of patient treatment in last 30 days.
+-/	Get the total sum of patient treatment in last 30 days.
 
 
 

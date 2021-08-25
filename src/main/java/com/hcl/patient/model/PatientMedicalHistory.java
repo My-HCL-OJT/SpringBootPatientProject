@@ -1,14 +1,18 @@
 package com.hcl.patient.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +30,8 @@ import lombok.NoArgsConstructor;
 8. Charges
 9. patientId
 */
-@Entity(name = "pmh")
+@Entity
+@Table(name = "pmh")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,26 +39,36 @@ public class PatientMedicalHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pmh_id")
-	private Integer id;
-	@Column(name = "pmh_enums")
-	private IllnessEnums illEnums;
-	@Column(name = "pmh_descp")
-	private String Description;
-	@Column(name = "pmh_hospitalAdmission")
+	private Long id;
+
+	private String name;
+
+	private String description;
+
 	private Boolean hospitalAdmission;
-	@Column(name = "pmh_cdate")
-	private Date creationDate;
-	@Column(name = "pmh_ddate", nullable = true)
-	private Date dischargeDate;
-	@Column(name = "pmh_isAlive")
+	@Column(columnDefinition = "DATE")
+	private LocalDate creationDate;
+	@Column(nullable = true, columnDefinition = "DATE")
+	private LocalDate dischargeDate;
+
 	private Boolean isAlive;
-	@Column(name = "pmh_charges")
+
+	public Boolean isAlive() {
+		return this.isAlive;
+	}
+
 	private Double charges;
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name="patient_id",referencedColumnName="id")
 	private Patient patient;
 
-	public PatientMedicalHistory(Date creationDate, Date dischargeDate, Boolean isAlive, Double charges) {
+	public PatientMedicalHistory(String name, String description, Boolean hospitalAdmission, LocalDate creationDate,
+			LocalDate dischargeDate, Boolean isAlive, Double charges) {
+		this.name = name;
+		this.description = description;
+		this.hospitalAdmission = hospitalAdmission;
 		this.creationDate = creationDate;
 		this.dischargeDate = dischargeDate;
 		this.isAlive = isAlive;

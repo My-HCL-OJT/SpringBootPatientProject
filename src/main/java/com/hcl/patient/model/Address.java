@@ -21,24 +21,23 @@ import lombok.NoArgsConstructor;
 5. Landmark
 6. Pincode
 */
-@Entity(name = "address")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "address_id")
-	private Integer id;
-	@Column(name = "address_street")
+	private Long id;
+
 	private String street;
-	@Column(name = "address_city")
+
 	private String city;
-	@Column(name = "address_state")
+
 	private String state;
-	@Column(name = "address_landmark")
+
 	private String landmark;
-	@Column(name = "address_zip")
+
 	private Integer zip;
 
 	public Address(String street, String city, String state, String landmark, Integer zip) {

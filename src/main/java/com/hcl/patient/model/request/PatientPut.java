@@ -1,6 +1,6 @@
 package com.hcl.patient.model.request;
 
-import com.hcl.patient.model.Illness;
+import com.hcl.patient.model.PatientMedicalHistory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +22,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientPut {
-	private Integer patientId;
-	private Illness illness;
+	private int id;
+	private PatientMedicalHistory pmh;
 }
