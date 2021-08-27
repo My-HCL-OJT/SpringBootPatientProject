@@ -1,7 +1,9 @@
-package com.hcl.patient.model;
+package com.hcl.patient.model.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.hcl.patient.model.entity.Illness;
 
 import lombok.Getter;
 
@@ -12,7 +14,11 @@ hospitalAdmission
 }*/
 @Getter
 public enum IllnessEnums {
-	COVID19(1, "COVID-19", "Deadly Virus", true);
+	COVID19(1, "COVID-19", "Deadly Virus with symptoms such as coughing, fever and many other deadly symptoms.", true),
+	COVID19Delta(2, "COVID-19 Delta Strain",
+			"A deadly version of the COVID-19 originated in Asia and is more deadly than COVID-19", true),
+	COVID19Variant(3, "COVID-19 Variant Strain",
+			"A deadly version of the COVID-19 originated around the world and can be more deadly than COVID-19", true);
 
 	private final Integer id;
 	private String name;

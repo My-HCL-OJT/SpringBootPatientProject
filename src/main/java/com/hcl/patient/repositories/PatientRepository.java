@@ -1,14 +1,12 @@
-package com.hcl.patient.repository;
-
-import java.util.List;
+package com.hcl.patient.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.hcl.patient.model.Patient;
+import com.hcl.patient.model.entity.Patient;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 	Patient findByName(String name);
-	List<Patient> findByNationalId(Integer nationalId);
+	Patient findByNationalId(Integer nationalId);
 }

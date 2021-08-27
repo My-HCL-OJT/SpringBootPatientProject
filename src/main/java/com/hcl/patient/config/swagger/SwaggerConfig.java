@@ -1,4 +1,4 @@
-package com.hcl.patient.config;
+package com.hcl.patient.config.swagger;
 
 import java.util.Collections;
 

@@ -1,4 +1,4 @@
-package com.hcl.patient.model;
+package com.hcl.patient.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

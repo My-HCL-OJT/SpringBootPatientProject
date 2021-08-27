@@ -1,6 +1,5 @@
 package com.hcl.patient.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.patient.model.Patient;
-import com.hcl.patient.model.PatientMedicalHistory;
+import com.hcl.patient.model.entity.Patient;
+import com.hcl.patient.model.entity.PatientMedicalHistory;
 import com.hcl.patient.model.request.MedicalHistoryRequest;
-import com.hcl.patient.repository.PatientMedicalHistoryRepository;
-import com.hcl.patient.repository.PatientRepository;
+import com.hcl.patient.repositories.PatientMedicalHistoryRepository;
+import com.hcl.patient.repositories.PatientRepository;
 import com.hcl.patient.service.PatientService;
 
 @RestController
@@ -48,30 +47,27 @@ public class HistoryController {
 		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.addHistory(id, temp), HttpStatus.OK);
 		return re;
 	}
-	// Get all patients who have been hospitalized.
-
-	// Get all patients who are currently hospitalized.
 
 	// Get all patients who are dead
 	@GetMapping(value = "/{isAlive}")
-	public ResponseEntity<List<Patient>> getPatientHistory(@PathVariable Boolean isAlive) {
+	public ResponseEntity<List<Patient>> getPatientHistoryIfNoAlive(@PathVariable Boolean isAlive) {
 		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.getPatientIfAliveisFalse(isAlive),
 				HttpStatus.OK);
 		return re;
 	}
 
 	// Get all patients with Illness-Covid in last 30 days
-	@GetMapping(value = "/30days")
-	public ResponseEntity<List<PatientMedicalHistory>> getPatientHistory() {
-		ResponseEntity<List<PatientMedicalHistory>> re = new ResponseEntity<List<PatientMedicalHistory>>(
-				ps.getPatientByRecentDate(), HttpStatus.OK);
+	@GetMapping(value = "/30days/{data}")
+	public ResponseEntity<List<Patient>> getPatientHistory(@PathVariable String data) {
+		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.getPatientByRecentDate(data),
+				HttpStatus.OK);
 		return re;
 	}
 
 	// Get the percentage of covid patients
-	@GetMapping(value = "/Cper")
-	public ResponseEntity<Double> getCovidPercentage() {
-		ResponseEntity<Double> re = new ResponseEntity<Double>(ps.getCovidPercentage(), HttpStatus.OK);
+	@GetMapping(value = "/percentage/{data}")
+	public ResponseEntity<Double> getCovidPercentage(@PathVariable String data) {
+		ResponseEntity<Double> re = new ResponseEntity<Double>(ps.getCovidPercentage(data), HttpStatus.OK);
 		return re;
 	}
 
@@ -81,15 +77,20 @@ public class HistoryController {
 		ResponseEntity<Double> re = new ResponseEntity<Double>(ps.totalCharges(), HttpStatus.OK);
 		return re;
 	}
-	
-	@GetMapping(value = "/Hospitalized")
-	public ResponseEntity<List<Patient>> patientHospitalized() {
-		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.temp(), HttpStatus.OK);
+
+	// Get all patients who are currently hospitalized.
+	@GetMapping(value = "/Hospitalized/{data}")
+	public ResponseEntity<List<Patient>> patientHospitalized(@PathVariable Boolean data) {
+		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.findCurrentHospitalized(data),
+				HttpStatus.OK);
 		return re;
 	}
-	@GetMapping(value = "/BeenHospitalized")
-	public ResponseEntity<List<Patient>> patientBeenHospitalized() {
-		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.temp2(), HttpStatus.OK);
+
+	// Get all patients who have been hospitalized.
+	@GetMapping(value = "/BeenHospitalized/{data}")
+	public ResponseEntity<List<Patient>> patientBeenHospitalized(@PathVariable Boolean data) {
+		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.findIFBeenHospitalized(data),
+				HttpStatus.OK);
 		return re;
 	}
 }

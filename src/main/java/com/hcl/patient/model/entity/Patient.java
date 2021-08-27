@@ -1,4 +1,4 @@
-package com.hcl.patient.model;
+package com.hcl.patient.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;

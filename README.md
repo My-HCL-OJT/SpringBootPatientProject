@@ -37,9 +37,9 @@ PatientMedicalHistory
 
 -/	get- to chk if patient exists- nationalId
 
--	POST to create a new patient record (If a patient already exist- then we will throw a custom exception with a message that patient already exist- RestControllerAdvice)
+-/	POST to create a new patient record (If a patient already exist- then we will throw a custom exception with a message that patient already exist- RestControllerAdvice)
 
--	PUT- we will update the patient illness
+-/	PUT- we will update the patient illness
 
 -/	Delete- by patient Id
 

@@ -16,8 +16,8 @@ public class MedicalHistoryRequest {
 	private String name;
 	private String description;
 	private Boolean hospitalAdmission;
-	private String creationDate;
-	private String dischargeDate;
+	private LocalDate creationDate;
+	private LocalDate dischargeDate;
 	private Boolean isAlive;
 	private Double charges;
 }

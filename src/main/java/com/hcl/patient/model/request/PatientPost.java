@@ -1,7 +1,7 @@
 package com.hcl.patient.model.request;
 
-import com.hcl.patient.model.Address;
-import com.hcl.patient.model.PatientMedicalHistory;
+import com.hcl.patient.model.entity.Address;
+import com.hcl.patient.model.entity.PatientMedicalHistory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

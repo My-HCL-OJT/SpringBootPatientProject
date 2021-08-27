@@ -1,4 +1,4 @@
-package com.hcl.patient.model;
+package com.hcl.patient.model.entity;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -64,7 +64,17 @@ public class PatientMedicalHistory {
 	// @JoinColumn(name="patient_id",referencedColumnName="id")
 	private Patient patient;
 
-	public PatientMedicalHistory(String name, String description, Boolean hospitalAdmission, LocalDate creationDate,
+	public PatientMedicalHistory (String name, String description, Boolean hospitalAdmission, LocalDate creationDate,
+			LocalDate dischargeDate, Boolean isAlive, Double charges) {
+		this.name = name;
+		this.description = description;
+		this.hospitalAdmission = hospitalAdmission;
+		this.creationDate = creationDate;
+		this.dischargeDate = dischargeDate;
+		this.isAlive = isAlive;
+		this.charges = charges;
+	}
+	public void setPatientMedicalHistory(String name, String description, Boolean hospitalAdmission, LocalDate creationDate,
 			LocalDate dischargeDate, Boolean isAlive, Double charges) {
 		this.name = name;
 		this.description = description;

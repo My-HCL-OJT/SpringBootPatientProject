@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.patient.model.Patient;
+import com.hcl.patient.model.entity.Patient;
 import com.hcl.patient.model.request.PatientPost;
 import com.hcl.patient.model.request.PatientPut;
-import com.hcl.patient.repository.PatientRepository;
+import com.hcl.patient.repositories.PatientRepository;
 import com.hcl.patient.service.PatientService;
 
 @RestController
@@ -24,6 +25,7 @@ import com.hcl.patient.service.PatientService;
 public class PatientController {
 	PatientService ps;
 	PatientRepository pr;
+
 	@Autowired
 	public PatientController(PatientService ps, PatientRepository pr) {
 		this.ps = ps;
@@ -35,15 +37,24 @@ public class PatientController {
 		ResponseEntity<String> re = new ResponseEntity<String>("Hello World I am a new Patient!", HttpStatus.OK);
 		return re;
 	}
+
 	@PostMapping
 	public ResponseEntity<Patient> postPatient(@RequestBody PatientPost pp) {
 		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.createPatient(pp), HttpStatus.CREATED);
 		return re;
 	}
 
+	/*
+	 * @PostMapping(value = "all") public ResponseEntity<List<Patient>>
+	 * postAllPatient(@RequestBody List<PatientPost> pp) {
+	 * ResponseEntity<List<Patient>> re = new
+	 * ResponseEntity<List<Patient>>(ps.createListOfPatient(pp),
+	 * HttpStatus.CREATED); return re; }
+	 */
+
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
-		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.getPatientById(id), HttpStatus.OK);
+		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.getPatientById(id).orElse(null), HttpStatus.OK);
 		return re;
 	}
 
@@ -52,22 +63,25 @@ public class PatientController {
 		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.getAllPatient(), HttpStatus.OK);
 		return re;
 	}
-	//Delete- by patient Id
+
+	// Delete- by patient Id
 	@DeleteMapping(value = "{id}")
 	public String deletePatient(@PathVariable Long id) {
 		ps.deletePatient(id);
 		return "Patient deleted with id " + id;
 	}
-	//get- to chk if patient exists- nationalId
+
+	// get- to chk if patient exists- nationalId
 	@GetMapping(value = "/ni/{id}")
-	public ResponseEntity<List<Patient>> getPatientFromNi(@PathVariable Integer id) {
-		ResponseEntity<List<Patient>> re = new ResponseEntity<List<Patient>>(ps.getByNI(id), HttpStatus.OK);
+	public ResponseEntity<Patient> getPatientFromNi(@PathVariable Integer id) {
+		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.getByNI(id), HttpStatus.OK);
 		return re;
 	}
-	//get- to chk if patient exists- nationalId
-	@GetMapping(value = "/update/{id}")
-	public ResponseEntity<Patient> updatePatientHistory(@PathVariable Long id,@RequestBody PatientPut put) {
-		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.updatePatientHistory(id,put), HttpStatus.OK);
+
+	// get- to chk if patient exists- nationalId
+	@PutMapping(value = "/update/{id}")
+	public ResponseEntity<Patient> updatePatientHistory(@PathVariable Long id, @RequestBody PatientPut put) {
+		ResponseEntity<Patient> re = new ResponseEntity<Patient>(ps.updatePatientHistory(id, put), HttpStatus.OK);
 		return re;
 	}
 

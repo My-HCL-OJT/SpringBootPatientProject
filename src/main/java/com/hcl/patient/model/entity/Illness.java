@@ -1,4 +1,4 @@
-package com.hcl.patient.model;
+package com.hcl.patient.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
